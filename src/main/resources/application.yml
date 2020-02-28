@@ -1,0 +1,68 @@
+spring:
+  profiles:
+    active:
+      - stage
+    include: common
+
+
+#spring:
+#  profiles: dev
+#    include: common
+#  datasource:
+#    driverClassName: org.postgresql.Driver
+#    url: jdbc:postgresql://localhost/playfantasy
+#    username: postgres
+#    password: admin
+#
+#---
+#spring:
+#  profiles: stage
+#    include: common
+#  datasource:
+#    driverClassName: org.postgresql.Driver
+#    url: jdbc:postgresql://13.127.102.167:5432/play_fantasy
+#    username: postgres
+#    password: playfantasy
+#
+#---
+#spring:
+#  profiles:
+#    active: dev
+#    include: common
+#  jpa:
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        format-sql: true
+#      jadira:
+#        usertype:
+#          autoRegisterUserTypes: true
+#
+##todo: make sure to always enable security in production
+#security:
+#  basic:
+#    enabled: false
+#
+##management endpoints on a separate port
+## management port is internal only. no need to secure it.
+#management:
+#  port: 8091
+#  security:
+#    enabled: false
+#
+#server:
+#  port: 8090
+#
+#logging:
+#  level:
+#    org.springframework.web: DEBUG
+#    com.playfantasy: DEBUG
+#  pattern:
+#    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+#    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+#  file: league_service.log
+#
+#total_players_per_team: 7
+#total_players_not_from_series_hosting_country: 4
+#total_players: 11
+#total_credits: 100

@@ -1,0 +1,66 @@
+spring:
+  profiles: prod
+  datasource:
+    #driverClassName: org.postgresql.Driver
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://db-master.pfantasy.com:5432/play_fantasy?currentSchema=public
+    username: funny
+    password: funny
+    minIdle: 3
+    maxIdle: 10
+    maxActive: 25
+    maxWait: 10000
+    validationQuery: select 1
+    removeAbandoned: true
+    removeAbandonedTimeout: 120
+    logAbandoned: true
+    testOnBorrow: true
+    testOnConnect: true
+    testWhileIdle: true
+  slave-datasource:
+    url: jdbc:postgresql://db-slave.pfantasy.com:5432/play_fantasy?currentSchema=public
+    username: funny
+    password: funny
+    driver-class-name: org.postgresql.Driver
+    minIdle: 3
+    maxIdle: 10
+    maxActive: 25
+    maxWait: 10000
+    validationQuery: select 1
+    removeAbandoned: true
+    removeAbandonedTimeout: 120
+    logAbandoned: true
+    testOnBorrow: true
+    testOnConnect: true
+    testWhileIdle: true
+      
+  data:
+    mongodb:
+      database: playfantasy
+      hosts: mongo-primary.pfantasy.com,mongo-secondary.pfantasy.com,mongo-arbiter.pfantasy.com
+      port: 27017
+      uri: mongodb://mongo-primary.pfantasy.com:27017,mongo-secondary.pfantasy.com:27017/playfantasy?maxPoolSize=50
+#      repositories:
+#        enabled: true
+app:
+  redis:
+    uri:
+      list: redis://redis-02.pfantasy.com:8000/,redis://redis-02.pfantasy.com:8001/,redis://redis-02.pfantasy.com:8002/,redis://redis-01.pfantasy.com:7000/,redis://redis-01.pfantasy.com:7001/,redis://redis-01.pfantasy.com:7002/
+      
+scheduler:
+  baseurl: http://scheduler.pfantasy.com/scheduler/api
+
+uploader:
+  baseurl: http://uploader1.pfantasy.com:8070/uploader_service/api
+  enabled:
+    - true
+zookeeper:
+  watchFlag: true
+  appname: league_service
+  zkHost: zk-01.pfantasy.com:2181,zk-02.pfantasy.com:2181,zk-03.pfantasy.com:2181
+
+logging:
+  config: classpath:logback-prod.xml
+
+configProps: 
+  flipCoinRequestUrl: http://bonus.pfantasy.com/bonusservice/
