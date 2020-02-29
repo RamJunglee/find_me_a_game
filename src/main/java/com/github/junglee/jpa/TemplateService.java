@@ -49,9 +49,7 @@ public class TemplateService
 			}
 		}
 		
-		
-		System.out.println( "temp map **************"+ tempMap );
-		
+		templates = (List<Template>) repo.findAll();
 	}
 	
 	public List< Template > createTemplates(TemplateDto dto) {
