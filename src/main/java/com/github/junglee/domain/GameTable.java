@@ -12,9 +12,9 @@ import lombok.Data;
 @Data
 public class GameTable {
 	@Id
-	Integer id;
+	Long id;
 
-	Integer templateId;
+	Long templateId;
 
 	@CreationTimestamp
 	Date createdAt;

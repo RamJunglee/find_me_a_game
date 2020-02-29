@@ -15,7 +15,7 @@ public class GameController {
 	private GameService gameService;
 
 	@PostMapping("/join_user")
-	public int joinGameTable(int templateId, int userId) {
+	public long joinGameTable(int templateId, int userId) {
 		return gameService.join(templateId, userId);
 	}
 
