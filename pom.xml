@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.playfantasy</groupId>
-	<artifactId>cricapi-service</artifactId>
+	<groupId>com.github.junglee</groupId>
+	<artifactId>find_me_a_game</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>cricapi-service</name>
-	<description>Spring boot project for cricapi</description>
+	<name>find_me_a_game</name>
+	<description>Spring boot project for find_me_a_game</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -68,6 +68,16 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.7.0</version>
+		</dependency>
 	
 	</dependencies>
 
@@ -78,6 +88,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>find_me_a_game</finalName>
 	</build>
 
 
