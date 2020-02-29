@@ -2,6 +2,8 @@ package com.github.junglee.controller;
 
 import java.util.List;
 
+import org.josql.QueryExecutionException;
+import org.josql.QueryParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,7 +46,7 @@ public class TemplateController
 	
 	@GetMapping(value = "/getTemplateId", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public Long getTempIdByCriteria(@RequestParam int prizeType, @RequestParam int size, @RequestParam int format,@RequestParam int entryFee){
+	public Long getTempIdByCriteria(@RequestParam int prizeType, @RequestParam int size, @RequestParam int format,@RequestParam int entryFee) throws Exception, QueryExecutionException{
 		return service.getTempIdByCriteria( prizeType, size, format, entryFee);
 	}
 }

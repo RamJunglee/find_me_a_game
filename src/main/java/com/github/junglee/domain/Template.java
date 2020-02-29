@@ -16,8 +16,9 @@ import lombok.Data;
 @Data
 @Table( name = "template" )
 @Entity
-public class Template
-{
+public class Template implements java.io.Serializable {
+
+	    private static final long    serialVersionUID    = 1L;
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	protected long id;

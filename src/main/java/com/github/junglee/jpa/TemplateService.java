@@ -1,9 +1,17 @@
 package com.github.junglee.jpa;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import org.josql.Query;
+import org.josql.QueryExecutionException;
+import org.josql.QueryParseException;
+import org.josql.QueryResults;
+import org.josql.expressions.ExpressionList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +26,34 @@ public class TemplateService
 	
 	List< Template > templates;
 	
+	String mapKey = "type: #type#|size: #size#|format: #format#";
+	
+	Map<String, List<Template>> tempMap;
+	
 	@PostConstruct
 	public void initTemplate() {
+		tempMap = new HashMap< String, List<Template> >();
+		List<Template> l = new ArrayList<>();
 		templates = ( List< Template > ) repo.findAll();
+		System.out.println( "templates map **************"+ templates );
+		for(Template t : templates) {
+			String key = mapKey.replaceAll( "#type#", t.getType()+"" ).replaceAll( "#size#", t.getSize()+"" ).replaceAll( "#format#", t.getFormat()+"" );
+			List<Template> 	lmap = 	tempMap.get( key );
+			if(lmap ==null) {
+				lmap = new ArrayList<>();
+				lmap.add( t );
+				tempMap.put( key, lmap );
+			}else {
+				lmap.add( t );
+				tempMap.put( key, lmap );
+			}
+		}
+		
+		
+		System.out.println( "temp map **************"+ tempMap );
+		
 	}
+	
 	public List< Template > createTemplates(TemplateDto dto) {
 		int[] type = dto.getPrizeType();
 		int[] size = dto.getSize();
@@ -64,10 +96,19 @@ public class TemplateService
 	public Template getTemplateById(long tempId) {
 		return repo.findOne( tempId );
 	}
-	public Long getTempIdByCriteria( int prizeType, int size, int format, int entryFee )
+	public Long getTempIdByCriteria( int prizeType, int size, int format, int entryFee ) throws QueryParseException, QueryExecutionException
 	{
-		
-		return null;
+		String key = mapKey.replaceAll( "#type#", prizeType+"" ).replaceAll( "#size#", size+"" ).replaceAll( "#format#", format+"" );
+		List<Template> temps = tempMap.get( key );
+		Query q = new Query();
+		 q.parse("SELECT * FROM com.github.junglee.domain.Template WHERE entryFee=:entryFee ");
+		 q.setVariable("entryFee", entryFee);
+		 
+		 QueryResults execute = q.execute(temps);
+		 List<Template> results = execute.getResults();
+		 
+		return  results.size()>0?results.get( 0 ).getId():0;
+
 	}
 
 }
