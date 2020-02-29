@@ -22,7 +22,7 @@ public class Template
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	protected long id;
 	
-	@Column(name = "type")
+	@Column(name = "prize_type")
 	@NotNull
 	private int type;
 	

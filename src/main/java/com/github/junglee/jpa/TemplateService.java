@@ -1,20 +1,32 @@
 package com.github.junglee.jpa;
 
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.github.junglee.domain.Template;
+import com.github.junglee.domain.TemplateDto;
 
 @Service
 public class TemplateService
 {
 	@Autowired
 	TemplateRepository repo;
-	public void createTemplates() {
-		int[] type = {1,2};
-		int[] size = {2,6};
-		int[] format = {1,2,3,4};
-		int[] entryFee = {2,4,6,8,10,12};
+	
+	List< Template > templates;
+	
+	@PostConstruct
+	public void initTemplate() {
+		templates = ( List< Template > ) repo.findAll();
+	}
+	public List< Template > createTemplates(TemplateDto dto) {
+		int[] type = dto.getPrizeType();
+		int[] size = dto.getSize();
+		int[] format = dto.getFormat();
+		int[] entryFee = dto.getEntryFee();
 		
 		for(int i =0; i<type.length;i++)
 		{
@@ -30,16 +42,32 @@ public class TemplateService
 						temp.setFormat( format[k] );
 						temp.setSize( size[j] );
 						temp.setType( type[i] );
-						
+						try {
 						repo.save( temp );
+						}catch(Exception e) {
+							e.printStackTrace();
+						}
 					}
 				}
 				
 			}
 		}
+		// need to add redis pubsub for reloading the temps 
+		return ( List< Template > ) repo.findAll();
 		
 	}
+	public List< Template > getAllTemps()
+	{
+		return ( List< Template > ) repo.findAll();
+	}
 	
-	
+	public Template getTemplateById(long tempId) {
+		return repo.findOne( tempId );
+	}
+	public Long getTempIdByCriteria( int prizeType, int size, int format, int entryFee )
+	{
+		
+		return null;
+	}
 
 }
