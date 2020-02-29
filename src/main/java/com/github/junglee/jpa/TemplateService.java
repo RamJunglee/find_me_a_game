@@ -11,7 +11,6 @@ import org.josql.Query;
 import org.josql.QueryExecutionException;
 import org.josql.QueryParseException;
 import org.josql.QueryResults;
-import org.josql.expressions.ExpressionList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +34,6 @@ public class TemplateService
 		tempMap = new HashMap< String, List<Template> >();
 		List<Template> l = new ArrayList<>();
 		templates = ( List< Template > ) repo.findAll();
-		System.out.println( "templates map **************"+ templates );
 		for(Template t : templates) {
 			String key = mapKey.replaceAll( "#type#", t.getType()+"" ).replaceAll( "#size#", t.getSize()+"" ).replaceAll( "#format#", t.getFormat()+"" );
 			List<Template> 	lmap = 	tempMap.get( key );

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.github.junglee.domain.GameState;
 import com.github.junglee.service.GameService;
 
-@Controller("/game")
+@Controller("/fmg/game")
 public class GameController {
 
 	@Autowired
