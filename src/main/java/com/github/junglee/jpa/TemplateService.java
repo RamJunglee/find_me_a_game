@@ -20,7 +20,7 @@ public class TemplateService
 	
 	@PostConstruct
 	public void initTemplate() {
-		templates = ( List< Template > ) repo.findAll();
+		templates = (List<Template>) repo.findAll();
 	}
 	public List< Template > createTemplates(TemplateDto dto) {
 		int[] type = dto.getPrizeType();
