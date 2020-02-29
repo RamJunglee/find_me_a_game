@@ -17,7 +17,7 @@ CREATE TABLE public.template
 )
 
 In-Memory : Redis
-Used for selecting tableId by templateId
+Used for selecting tableId by templateId and score
 
 
 
