@@ -7,6 +7,9 @@ import javax.persistence.Id;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import lombok.Data;
+
+@Data
 public class GameTable {
 	@Id
 	Integer id;
